@@ -12,7 +12,7 @@ To make available to all users on the workstation, copy `flatten_segments.py` to
 For specific users, copy to `/opt/Autodesk/user/<user name>/python`
 
 ## Menus
-- Right-click selected nodes in the Batch schematic --> Edit... -> Set Render Range to Current Frame
+- Right-click selected nodes in the Batch schematic `->` Edit... `->` Set Render Range to Current Frame
 
 ## Acknowledgements
 Many thanks to [pyflame.com](http://www.pyflame.com)
