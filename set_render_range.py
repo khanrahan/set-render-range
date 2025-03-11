@@ -3,7 +3,7 @@ Script Name: Set Render Range
 Written By: Kieran Hanrahan
 
 Script Version: 1.0.0
-Flame Version: 2021.1
+Flame Version: 2022
 
 URL: http://github.com/khanrahan/set-render-range
 
@@ -28,7 +28,6 @@ To Install:
     /opt/Autodesk/user/<user name>/python
 '''
 
-from __future__ import print_function
 import flame
 
 TITLE = 'Set Render Range'
@@ -77,5 +76,5 @@ def get_batch_custom_ui_actions():
              'actions': [{'name': 'Set Render Range to Current Frame',
                           'isVisible': scope_output_node,
                           'execute': set_to_current_frame,
-                          'minimumVersion': '2021.1'}]
+                          'minimumVersion': '2022.0.0.0'}]
             }]
