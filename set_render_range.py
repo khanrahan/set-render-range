@@ -33,7 +33,7 @@ import flame
 TITLE = 'Set Render Range'
 VERSION_INFO = (1, 0, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
-TITLE_VERSION = '{} v{}'.format(TITLE, VERSION)
+TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
 
 
@@ -45,14 +45,14 @@ def message(string):
 def set_to_current_frame(selection):
     """Set From & To values of the Render Range to be the current frame."""
     message(TITLE_VERSION)
-    message('Script called from {}'.format(__file__))
+    message(f'Script called from {__file__}')
 
     frame = flame.batch.current_frame
 
     for node in selection:
         node.range_start = frame
         node.range_end = frame
-        message('{} set to only render frame {}'.format(node.name.get_value(), frame))
+        message(f'{node.name.get_value()} set to only render frame {frame}')
 
     message('Done!')
 
