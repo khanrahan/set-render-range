@@ -1,14 +1,14 @@
-'''
+"""
 Script Name: Set Render Range
 Written By: Kieran Hanrahan
 
-Script Version: 1.0.0
-Flame Version: 2021.1
+Script Version: 2.0.0
+Flame Version: 2022
 
 URL: http://github.com/khanrahan/set-render-range
 
 Creation Date: 02.05.24
-Update Date: 02.05.24
+Update Date: 03.11.25
 
 Description:
 
@@ -22,60 +22,59 @@ Menus:
 To Install:
 
     For all users, copy this file to:
-    /opt/Autodesk/shared/python
+    /opt/Autodesk/shared/python/
 
-    For a specific user, copy this file to:
-    /opt/Autodesk/user/<user name>/python
-'''
+    For a specific user on Linux, copy this file to:
+    /home/<user_name>/flame/python/
 
-from __future__ import print_function
+    For a specific user on Mac, copy this file to:
+    /Users/<user_name>/Library/Preferences/Autodesk/flame/python/
+"""
+
 import flame
 
 TITLE = 'Set Render Range'
-VERSION_INFO = (1, 0, 0)
+VERSION_INFO = (2, 0, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
-TITLE_VERSION = '{} v{}'.format(TITLE, VERSION)
+TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
 
 
 def message(string):
-    '''Print message to shell window and append global MESSAGE_PREFIX.'''
-
+    """Print message to shell window and append global MESSAGE_PREFIX."""
     print(' '.join([MESSAGE_PREFIX, string]))
 
 
 def set_to_current_frame(selection):
-    '''Set From & To values of the Render Range to be the current frame.'''
-
+    """Set From & To values of the Render Range to be the current frame."""
     message(TITLE_VERSION)
-    message('Script called from {}'.format(__file__))
+    message(f'Script called from {__file__}')
 
     frame = flame.batch.current_frame
 
     for node in selection:
         node.range_start = frame
         node.range_end = frame
-        message('{} set to only render frame {}'.format(node.name.get_value(), frame))
+        message(f'{node.name.get_value()} set to only render frame {frame}')
 
     message('Done!')
 
 
 def scope_output_node(selection):
-    '''Filter for only Render or Write File nodes.'''
+    """Filter for only Render or Write File nodes."""
+    valid_objects = (
+            flame.PyRenderNode,
+            flame.PyWriteFileNode,
+    )
 
-    for node in selection:
-        print(node.type.get_value())
-        if not node.type.get_value() in ('Render', 'Write File'):
-            return False
-        return True
+    return all(isinstance(item, valid_objects) for item in selection)
 
 
 def get_batch_custom_ui_actions():
-    '''Python hook to add custom right click menu item.'''
-
+    """Python hook to add custom right click menu item."""
     return [{'name': 'Edit...',
              'actions': [{'name': 'Set Render Range to Current Frame',
                           'isVisible': scope_output_node,
                           'execute': set_to_current_frame,
-                          'minimumVersion': '2021.1'}]
+                          'minimumVersion': '2022.0.0.0'}]
             }]
