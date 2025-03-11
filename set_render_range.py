@@ -59,11 +59,12 @@ def set_to_current_frame(selection):
 
 def scope_output_node(selection):
     """Filter for only Render or Write File nodes."""
-    for node in selection:
-        print(node.type.get_value())
-        if not node.type.get_value() in ('Render', 'Write File'):
-            return False
-        return True
+    valid_objects = (
+            flame.PyRenderNode,
+            flame.PyWriteFileNode,
+    )
+
+    return all(isinstance(item, valid_objects) for item in selection)
 
 
 def get_batch_custom_ui_actions():
