@@ -1,4 +1,4 @@
-'''
+"""
 Script Name: Set Render Range
 Written By: Kieran Hanrahan
 
@@ -26,7 +26,7 @@ To Install:
 
     For a specific user, copy this file to:
     /opt/Autodesk/user/<user name>/python
-'''
+"""
 
 import flame
 
@@ -38,13 +38,13 @@ MESSAGE_PREFIX = '[PYTHON]'
 
 
 def message(string):
-    '''Print message to shell window and append global MESSAGE_PREFIX.'''
+    """Print message to shell window and append global MESSAGE_PREFIX."""
 
     print(' '.join([MESSAGE_PREFIX, string]))
 
 
 def set_to_current_frame(selection):
-    '''Set From & To values of the Render Range to be the current frame.'''
+    """Set From & To values of the Render Range to be the current frame."""
 
     message(TITLE_VERSION)
     message('Script called from {}'.format(__file__))
@@ -60,7 +60,7 @@ def set_to_current_frame(selection):
 
 
 def scope_output_node(selection):
-    '''Filter for only Render or Write File nodes.'''
+    """Filter for only Render or Write File nodes."""
 
     for node in selection:
         print(node.type.get_value())
@@ -70,7 +70,7 @@ def scope_output_node(selection):
 
 
 def get_batch_custom_ui_actions():
-    '''Python hook to add custom right click menu item.'''
+    """Python hook to add custom right click menu item."""
 
     return [{'name': 'Edit...',
              'actions': [{'name': 'Set Render Range to Current Frame',
